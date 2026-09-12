@@ -9,16 +9,24 @@ function updateHeader() {
 window.addEventListener('scroll', updateHeader, { passive: true });
 updateHeader();
 
-menuToggle.addEventListener('click', () => {
+menuToggle?.addEventListener('click', () => {
   const isOpen = siteNav.classList.toggle('open');
   menuToggle.setAttribute('aria-expanded', String(isOpen));
 });
 
-siteNav.querySelectorAll('a').forEach((link) => {
+siteNav?.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => {
     siteNav.classList.remove('open');
     menuToggle.setAttribute('aria-expanded', 'false');
   });
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && siteNav?.classList.contains('open')) {
+    siteNav.classList.remove('open');
+    menuToggle?.setAttribute('aria-expanded', 'false');
+    menuToggle?.focus();
+  }
 });
 
 const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -35,7 +43,7 @@ document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe
 const contactForm = document.querySelector('#contact-form');
 const formStatus = document.querySelector('#form-status');
 
-contactForm.addEventListener('submit', (event) => {
+contactForm?.addEventListener('submit', (event) => {
   event.preventDefault();
   const name = contactForm.elements.name.value.trim();
   const email = contactForm.elements.email.value.trim();
