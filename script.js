@@ -16,8 +16,14 @@ menuToggle?.addEventListener('click', () => {
 
 siteNav?.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => {
+    siteNav.querySelectorAll('a').forEach((navLink) => navLink.classList.remove('active'));
+    link.classList.add('active');
     siteNav.classList.remove('open');
     menuToggle.setAttribute('aria-expanded', 'false');
+
+    if (link.getAttribute('href') === '#top') {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   });
 });
 
